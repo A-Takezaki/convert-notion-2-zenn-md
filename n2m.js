@@ -23,7 +23,12 @@ const n2m = new NotionToMarkdown({ notionClient: notion });
 (async () => {
   const mdblocks = await n2m.pageToMarkdown(notionTargetPageId);
   const mdString = n2m.toMarkdownString(mdblocks);
-
-
   console.log(mdString.parent);
+  // Notion記法mdファイルをzenn記法mdファイルに変換する
+  // bookmarkタグを外す
+  const updatedMdString = mdString.replace(/\[bookmark\]\((https:\/\/zenn.dev\/[^\)]+)\)/g, '$1');
+  console.log(updatedMdString);
+  // 画像をDLしてリンクを変更する
+  // calloutブロックをalertタグに変換する
+
 })();
